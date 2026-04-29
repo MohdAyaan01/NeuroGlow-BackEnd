@@ -24,9 +24,13 @@ connectApp();
 const corsOptions: cors.CorsOptions = {
     origin: (origin, callback) => {
         if (!origin) return callback(null, true);
-        
-        const allowedOrigins = ["http://localhost:5173", "http://127.0.0.1:5173", "https://neuroglowai.onrender.com"];
-        
+
+        const allowedOrigins = [
+            "http://localhost:5173",
+            "http://127.0.0.1:5173",
+            "https://nueroglow-front-end.onrender.com" // <--- Add your EXACT frontend URL here
+        ];
+
         if (allowedOrigins.includes(origin)) {
             callback(null, true);
         } else {
@@ -47,8 +51,8 @@ app.get('/', (req: Request, res: Response) => res.send('Server Is Live!'));
 app.use('/api/ai', aiRouter);
 app.use('/api/user', userRouter);
 app.use('/api/auth', authRoutes);
-app.use('/api/auth',googleRoutes);
-app.use('/api/payment',paymentRoutes)
+app.use('/api/auth', googleRoutes);
+app.use('/api/payment', paymentRoutes)
 
 const PORT = process.env.PORT || 5000;
 
