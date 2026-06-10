@@ -10,7 +10,7 @@ export const generateArticle = async (req: CustomRequest, res: Response) => {
         const { prompt, length } = req.body;
 
         const response = await ollama.chat({
-            model: "tinyllama", // Try installing and changing this to "llama3" if possible!
+            model: "tinyllama",
             messages: [
                 {
                     role: "system",
@@ -63,7 +63,7 @@ export const generateBlogTitle = async (req: CustomRequest, res: Response) => {
         const { prompt } = req.body;
 
         const response = await ollama.chat({
-            model: "tinyllama", // Try changing this to "llama3" if possible!
+            model: "tinyllama", 
             messages: [
                 {
                     role: "system",
@@ -75,7 +75,7 @@ export const generateBlogTitle = async (req: CustomRequest, res: Response) => {
                 }
             ],
             options: {
-                temperature: 0.8, // Slightly higher creativity for titles
+                temperature: 0.8,
                 num_predict: 700,
             }
         });
@@ -129,7 +129,7 @@ export const removeImageBackground = async (req: CustomRequest, res: Response) =
             ]
         })
         
-        // CRITICAL FIX: Delete the temporary file from your server so it doesn't run out of storage!
+      
         import("fs").then(fs => fs.unlinkSync(image.path)).catch(console.error);
 
         await Creation.create({
@@ -147,7 +147,7 @@ export const removeImageBackground = async (req: CustomRequest, res: Response) =
 
     } catch (error: any) {
         console.log(error.message)
-        // Note: added status(500) so the frontend toast actually shows an error!
+        
         res.status(500).json({ success: false, message: error.message })
     }
 }
@@ -162,12 +162,10 @@ export const removeImageObject = async (req: CustomRequest, res: Response) => {
             return res.status(400).json({ success: false, message: "No image uploaded" });
         }
 
-        // WAIT for the AI generation to finish before grabbing the text!
         const { secure_url } = await cloudinary.uploader.upload(image.path, {
             transformation: [{ effect: `gen_remove:prompt_${object}` }]
         });
-        
-        // CRITICAL FIX: Delete the temporary file from your server
+
         import("fs").then(fs => fs.unlinkSync(image.path)).catch(console.error);
 
         await Creation.create({

@@ -28,7 +28,7 @@ const corsOptions: cors.CorsOptions = {
         const allowedOrigins = [
             "http://localhost:5173",
             "http://127.0.0.1:5173",
-            "https://nueroglow-front-end.onrender.com" // <--- Add your EXACT frontend URL here
+            "https://nueroglow-front-end.onrender.com" 
         ];
 
         if (allowedOrigins.includes(origin)) {
