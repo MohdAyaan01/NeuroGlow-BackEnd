@@ -38,7 +38,7 @@ export const toggleLikedCreations = async (req:AuthRequest, res:Response):Promis
         const creation = await Creation.findById(id);
 
         if (!creation) {
-            res.status(404).json({ success: false, message: "Creation Not Found" });
+            res.status(404).json({ success: false, message: "Creation Not Found !" });
             return;
         }
 

@@ -16,7 +16,7 @@ const connectApp = async () => {
         await connectDB();
         await connectCloudinary();
     } catch (error) {
-        console.log("Error connecting to services:", error);
+        console.log("Error connecting to services: Please Try Again", error);
     }
 }
 connectApp();
@@ -28,13 +28,13 @@ const corsOptions: cors.CorsOptions = {
         const allowedOrigins = [
             "http://localhost:5173",
             "http://127.0.0.1:5173",
-            "https://nueroglow-front-end.onrender.com" 
+            "https://nueroglow-front-end.onrender.com"
         ];
 
         if (allowedOrigins.includes(origin)) {
             callback(null, true);
         } else {
-            callback(new Error("Not Allowed By Cors"));
+            callback(new Error("Not Allowed By Cors...."));
         }
     },
     credentials: true
@@ -46,7 +46,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 
-app.get('/', (req: Request, res: Response) => res.send('Server Is Live!'));
+app.get('/', (req: Request, res: Response) => res.send('Server Is Live Now!...'));
 
 app.use('/api/ai', aiRouter);
 app.use('/api/user', userRouter);
