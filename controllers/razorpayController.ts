@@ -1,4 +1,4 @@
-import {razorpay} from "../configs/razorpay.js"
+import {razorpay} from "../config/razorpay.js"
 import crypto from "crypto";
 import type {Request,Response} from "express";
 
